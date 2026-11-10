@@ -168,7 +168,7 @@ public class Bot {
                 cooldown = 10;
             }
             case SELL -> {
-                p.networkHandler.sendChatCommand("wystawy " + cfg.amount + " " + cfg.price);
+                p.networkHandler.sendChatCommand(cfg.sellCommand + " " + cfg.amount + " " + cfg.price);
                 Webhook.send("💰 Wystawiono " + cfg.amount + "x " + cfg.item + " za " + cfg.price);
                 state = State.CHECK;
                 cooldown = Math.max(5, cfg.delayTicks);
