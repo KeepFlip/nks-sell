@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "nks",
+  "version": "${version}",
+  "name": "NKS Sell",
+  "description": "Automatyczne wystawianie przedmiotow komenda /wystawy",
+  "authors": ["NKS"],
+  "environment": "client",
+  "entrypoints": {
+    "client": ["pl.nks.NksMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
