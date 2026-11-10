@@ -1,6 +1,7 @@
 package pl.nks;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -26,6 +27,7 @@ public class Bot {
     private static int cooldown = 0;
     private static int timeout = 0;
     private static int takeClicks = 0;
+    private static boolean savedPause = true;
 
     public static void start(MinecraftClient mc) {
         Config c = Config.INSTANCE;
@@ -36,6 +38,8 @@ public class Bot {
         running = true;
         state = State.CHECK;
         cooldown = 0;
+        savedPause = mc.options.pauseOnLostFocus;
+        mc.options.pauseOnLostFocus = false; // pozwala zminimalizowac okno
         msg(mc, "§aBot uruchomiony: " + c.amount + "x " + c.item + " za " + c.price);
         Webhook.send("▶️ Bot uruchomiony: " + c.amount + "x " + c.item + " za " + c.price);
     }
@@ -46,6 +50,7 @@ public class Bot {
             return;
         }
         running = false;
+        mc.options.pauseOnLostFocus = savedPause;
         if (mc.player != null && mc.currentScreen instanceof GenericContainerScreen) mc.player.closeHandledScreen();
         msg(mc, "§cBot zatrzymany. " + reason);
         Webhook.send("⏹️ Bot zatrzymany. " + reason);
@@ -96,6 +101,10 @@ public class Bot {
         if (p == null || mc.interactionManager == null || mc.world == null) {
             running = false;
             return;
+        }
+        // zminimalizowane / nieaktywne okno: zamknij menu pauzy, zeby bot nie stal
+        if (!mc.isWindowFocused() && mc.currentScreen instanceof GameMenuScreen) {
+            mc.setScreen(null);
         }
         if (cooldown > 0) {
             cooldown--;
