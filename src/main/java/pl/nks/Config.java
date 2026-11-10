@@ -12,6 +12,7 @@ public class Config {
     public int amount = 64;
     public int price = 1400;
     public String webhook = "";
+    /** komenda wystawiania, bez ukosnika */
     public String sellCommand = "wystaw";
     public boolean hasChest = false;
     public int chestX, chestY, chestZ;
