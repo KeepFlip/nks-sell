@@ -17,7 +17,7 @@ public class Config {
     public boolean hasChest = false;
     public int chestX, chestY, chestZ;
     /** przerwa miedzy wystawieniami (20 ticków = 1 sekunda) */
-    public int delayTicks = 40;
+    public int delayTicks = 100;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static Config INSTANCE = load();
