@@ -12,6 +12,7 @@ public class Config {
     public int amount = 64;
     public int price = 1400;
     public String webhook = "";
+    public String sellCommand = "wystaw";
     public boolean hasChest = false;
     public int chestX, chestY, chestZ;
     /** przerwa miedzy wystawieniami (20 ticków = 1 sekunda) */
